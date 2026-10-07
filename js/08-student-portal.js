@@ -27,6 +27,10 @@
                     : '';
                 return `<span class="schedule-alert">${escapeHTML(room)} is reserved for an occasion. This class needs a room update.</span>${detailLine}${teacherAction}`;
             }
+            if (layout.status === 'available') {
+                // Dean set this room to "Gray - No class" and broadcast it
+                return `<span class="schedule-alert">🚫 No class: ${escapeHTML(room)} was marked "No class" by the dean.</span>`;
+            }
             if (layout.temporaryClass === item.className) {
                 return `<span class="schedule-temporary">Temporary room: ${escapeHTML(room)} (${item.time}–${item.endTime}, ${durationLabel})</span>`;
             }

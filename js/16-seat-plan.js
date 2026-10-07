@@ -126,3 +126,6 @@
             saveSeatPlan();
             renderSeatingGrid();
         }
+
+        // Runs here (not in 03-state.js) because the function is defined in this file
+        loadSavedSeatPlan();

@@ -3,6 +3,7 @@
         function configureStaffWorkspace() {
             const isFaculty = sessionUser.role === 'faculty';
             const department = TEACHER_DEPARTMENTS[sessionUser.username];
+            configureAnnouncementAudience(isFaculty);
             document.getElementById('staff-role-badge').innerText = isFaculty ? 'Faculty Workspace' : `Teacher Workspace - ${department}`;
             document.getElementById('staff-dashboard-title').innerText = isFaculty ? 'Faculty Dashboard' : 'Teacher Dashboard';
             document.getElementById('staff-dashboard-description').innerText = isFaculty

@@ -159,31 +159,39 @@
             msgEl.innerText = parts.join(' • ');
         }
 
+        // The room's default state: scheduled if a class is assigned to it, otherwise available
+        function getOriginalRoomLayout(room) {
+            const scheduledClass = Object.keys(ROOM_ASSIGNMENTS).find(c => ROOM_ASSIGNMENTS[c] === room) || '';
+            return { status: scheduledClass ? 'scheduled' : 'available', scheduledClass, temporaryClass: '' };
+        }
+
+        function isRoomOriginal(layout, room) {
+            const original = getOriginalRoomLayout(room);
+            return Boolean(layout) &&
+                layout.status === original.status &&
+                !layout.temporaryClass &&
+                !layout.occasionDetails;
+        }
+
+        // "Back to Normal": undo temporary rooms, occasions AND "No class" so every class resumes
         function resetTemporaryRooms() {
             if (sessionUser?.role !== 'faculty') return;
 
-            const tempRooms = FACULTY_ROOMS.filter(room => {
-                const layout = roomLayout[room];
-                return layout && layout.temporaryClass;
-            });
-
-            const pendingTempRooms = Object.keys(pendingRoomChanges).filter(room => {
-                const change = pendingRoomChanges[room];
-                return change && change.temporaryClass;
-            });
-
-            const totalAffected = new Set([...tempRooms, ...pendingTempRooms]).size;
+            const changedRooms = FACULTY_ROOMS.filter(room => !isRoomOriginal(roomLayout[room], room));
+            const pendingRooms = Object.keys(pendingRoomChanges);
+            const totalAffected = new Set([...changedRooms, ...pendingRooms]).size;
 
             if (totalAffected === 0) {
-                alert('No temporary room assignments to reset. All classrooms are already in their original state.');
+                alert('Nothing to reset. All classrooms are already in their original state.');
                 return;
             }
 
             const confirmed = window.confirm(
-                `Reset ${totalAffected} temporary room assignment${totalAffected === 1 ? '' : 's'} back to original rooms?\n\n` +
+                `Return ${totalAffected} room${totalAffected === 1 ? '' : 's'} to normal?\n\n` +
                 `This will:\n` +
+                `• Resume all classes set to "No class"\n` +
+                `• Remove all occasion reservations\n` +
                 `• Remove all temporary class assignments\n` +
-                `• Restore rooms to their original scheduled/available state\n` +
                 `• Discard any pending (unbroadcast) room changes\n\n` +
                 `This action cannot be undone.`
             );
@@ -191,30 +199,15 @@
             if (!confirmed) return;
 
             let resetCount = 0;
-
             FACULTY_ROOMS.forEach(room => {
-                const layout = roomLayout[room];
-                if (!layout) return;
-
-                if (layout.temporaryClass) {
-                    layout.temporaryClass = '';
-                    resetCount++;
-                }
-
-                const originalClass = Object.keys(ROOM_ASSIGNMENTS).find(c => ROOM_ASSIGNMENTS[c] === room);
-                if (originalClass) {
-                    layout.status = 'scheduled';
-                    layout.scheduledClass = originalClass;
-                } else if (layout.status !== 'occasion') {
-                    layout.status = 'available';
-                    layout.scheduledClass = '';
-                }
+                if (!isRoomOriginal(roomLayout[room], room)) resetCount++;
+                roomLayout[room] = getOriginalRoomLayout(room);
             });
 
             pendingRoomChanges = {};
 
             localStorage.setItem('taptrackDeanRoomLayout', JSON.stringify(roomLayout));
-            logAudit('ROOMS_RESET', `${resetCount} temporary room(s) reset to original`);
+            logAudit('ROOMS_RESET', `${resetCount} room(s) returned to normal`);
 
             updateBroadcastBadge();
             renderRoomMonitor();
@@ -223,7 +216,7 @@
 
             const msgEl = document.getElementById('room-auto-assign-message');
             if (msgEl) {
-                msgEl.innerText = `↩️ Reset complete. ${resetCount} temporary room assignment${resetCount === 1 ? '' : 's'} returned to original room${resetCount === 1 ? '' : 's'}.`;
+                msgEl.innerText = `↩️ Back to normal. ${resetCount} room${resetCount === 1 ? '' : 's'} restored - all classes resume.`;
             }
         }
 

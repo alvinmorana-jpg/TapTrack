@@ -17,7 +17,6 @@
         let selectedSeatPlanClass = '';
         let seatPlansByClass = {};
         let assignmentsByClass = {};
-        loadSavedSeatPlan();
 
         let currentClassCancelled = false;
         let selectedAttendanceStatus = 'present';
