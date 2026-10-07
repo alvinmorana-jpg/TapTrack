@@ -1,0 +1,50 @@
+name: Build Android APK
+
+on:
+  push:
+    branches: [ "main", "master" ]
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v4
+
+    - name: Set up Node
+      uses: actions/setup-node@v4
+      with:
+        node-version: '20'
+
+    - name: Set up JDK
+      uses: actions/setup-java@v4
+      with:
+        java-version: '17'
+        distribution: 'temurin'
+
+    - name: Install dependencies
+      run: npm install
+
+    - name: Copy web files into www
+      run: |
+        rm -rf www && mkdir www
+        cp -r index.html css js www/
+
+    - name: Generate Android project (if missing)
+      run: |
+        if [ ! -d android ]; then npx cap add android; fi
+        npx cap sync android
+
+    - name: Make Gradle executable
+      run: chmod +x ./android/gradlew
+
+    - name: Build Debug APK
+      working-directory: android
+      run: ./gradlew assembleDebug
+
+    - name: Upload APK Artifact
+      uses: actions/upload-artifact@v4
+      with:
+        name: taptrack-debug-apk
+        path: android/app/build/outputs/apk/debug/app-debug.apk
