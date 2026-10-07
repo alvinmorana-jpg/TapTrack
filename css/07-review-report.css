@@ -1,0 +1,222 @@
+        /* ==================== REVIEW / REPORT ==================== */
+        .review-form {
+            border-top: 1px solid var(--border-soft);
+            margin-top: 24px;
+            padding-top: 22px;
+        }
+
+        .review-form h3 {
+            color: var(--neon-cyan);
+            font-size: 16px;
+            margin-bottom: 8px;
+            font-weight: 800;
+        }
+
+        .review-form-grid {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 14px;
+        }
+
+        .review-form label {
+            color: var(--text-secondary);
+            display: block;
+            font-size: 10.5px;
+            font-weight: 700;
+            letter-spacing: 0.8px;
+            text-transform: uppercase;
+            margin-bottom: 7px;
+        }
+
+        .review-form input,
+        .review-form select,
+        .review-form textarea {
+            border: 1px solid var(--border-soft);
+            border-radius: var(--radius-sm);
+            font-family: inherit;
+            font-size: 14px;
+            padding: 11px 12px;
+            width: 100%;
+            background: rgba(5, 8, 22, 0.6);
+            color: var(--text-primary);
+        }
+
+        .review-form input::placeholder,
+        .review-form textarea::placeholder {
+            color: var(--text-dim);
+        }
+
+        .review-form input:focus,
+        .review-form select:focus,
+        .review-form textarea:focus {
+            outline: none;
+            border-color: var(--neon-cyan);
+            box-shadow: 0 0 0 3px rgba(0, 229, 255, 0.1);
+        }
+
+        .review-form select option {
+            background: var(--bg-panel-solid);
+            color: var(--text-primary);
+        }
+
+        .review-form textarea {
+            min-height: 80px;
+            resize: vertical;
+        }
+
+        .review-form .full-width {
+            grid-column: 1 / -1;
+        }
+
+        .review-deadline {
+            color: var(--text-secondary);
+            font-size: 12px;
+            margin: 8px 0;
+            font-style: italic;
+        }
+
+        .review-card,
+        .report-card {
+            border: 1px solid var(--border-soft);
+            border-radius: var(--radius-sm);
+            margin-bottom: 14px;
+            padding: 18px;
+            background: var(--bg-elevated);
+        }
+
+        .review-card:hover,
+        .report-card:hover {
+            border-color: var(--border-glow);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 26px rgba(0, 229, 255, 0.1);
+        }
+
+        .review-card h3,
+        .report-card h3 {
+            color: var(--neon-cyan);
+            font-size: 15px;
+            margin-bottom: 8px;
+            font-weight: 800;
+        }
+
+        .review-card p,
+        .report-card p {
+            color: var(--text-secondary);
+            font-size: 13px;
+            margin-bottom: 7px;
+            line-height: 1.55;
+        }
+
+        .review-card p strong,
+        .report-card p strong {
+            color: var(--text-primary);
+            font-weight: 700;
+        }
+
+        .review-proof {
+            max-height: 160px;
+            max-width: 240px;
+            object-fit: contain;
+            display: block;
+            margin: 10px 0;
+            border-radius: var(--radius-sm);
+            border: 1px solid var(--border-soft);
+        }
+
+        .review-actions {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+            margin-top: 14px;
+        }
+
+        .reject-review {
+            background: rgba(90, 106, 148, 0.2) !important;
+            color: var(--text-secondary) !important;
+            border-color: var(--border-soft) !important;
+        }
+
+        .reject-review:hover {
+            background: rgba(90, 106, 148, 0.35) !important;
+            color: var(--text-primary) !important;
+        }
+
+        .review-empty {
+            color: var(--text-dim);
+            font-size: 14px;
+            padding: 24px 0;
+            font-style: italic;
+            text-align: center;
+            background: var(--bg-elevated);
+            border-radius: var(--radius-sm);
+            border: 1px dashed var(--border-soft);
+        }
+
+        .report-submit-message {
+            color: var(--neon-green);
+            display: none;
+            font-size: 13px;
+            font-weight: 700;
+            margin: 8px 0 0;
+            padding: 10px 14px;
+            border-radius: var(--radius-sm);
+            background: rgba(0, 255, 157, 0.08);
+            border-left: 3px solid var(--neon-green);
+        }
+
+        .report-class-selector {
+            margin: 8px 0;
+            max-width: 380px;
+        }
+
+        .report-card-header {
+            border-bottom: 1px solid var(--border-soft);
+            margin-bottom: 12px;
+            padding-bottom: 10px;
+        }
+
+        .report-card-header small {
+            color: var(--text-dim);
+            display: block;
+            font-size: 11px;
+            margin-top: 4px;
+        }
+
+        .report-counts {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 8px;
+            margin: 16px 0;
+        }
+
+        .report-count {
+            background: var(--bg-panel-solid);
+            border: 1px solid var(--border-soft);
+            border-radius: var(--radius-sm);
+            font-size: 10px;
+            padding: 12px 6px;
+            text-align: center;
+            font-weight: 700;
+            letter-spacing: 0.8px;
+            text-transform: uppercase;
+            color: var(--text-secondary);
+        }
+
+        .report-count strong {
+            display: block;
+            font-size: 21px;
+            color: var(--neon-cyan);
+            margin-bottom: 3px;
+            font-weight: 900;
+        }
+
+        .print-report {
+            background: rgba(90, 106, 148, 0.2) !important;
+            color: var(--text-primary) !important;
+            border-color: var(--border-soft) !important;
+            margin-top: 8px;
+        }
+
+        .print-report:hover {
+            background: rgba(90, 106, 148, 0.35) !important;
+        }

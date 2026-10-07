@@ -1,0 +1,158 @@
+        /* ==================== MODAL ==================== */
+        #occasion-modal {
+            position: fixed;
+            inset: 0;
+            z-index: 9998;
+            background: rgba(4, 6, 15, 0.82);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .modal-card {
+            background: linear-gradient(170deg, rgba(22, 29, 60, 0.98), rgba(9, 13, 33, 0.98));
+            border: 1px solid rgba(255, 46, 151, 0.35);
+            border-radius: var(--radius-md);
+            box-shadow: 0 24px 70px rgba(0, 0, 0, 0.6), 0 0 60px rgba(255, 46, 151, 0.15);
+            padding: 30px 28px;
+            width: 100%;
+            max-width: 500px;
+            position: relative;
+            overflow: hidden;
+            animation: modalIn 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        @keyframes modalIn {
+            from {
+                opacity: 0;
+                transform: scale(0.95) translateY(10px);
+            }
+
+            to {
+                opacity: 1;
+                transform: scale(1) translateY(0);
+            }
+        }
+
+        .modal-accent {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, var(--neon-magenta), var(--neon-violet), transparent);
+        }
+
+        .modal-title {
+            color: var(--neon-magenta);
+            font-size: 20px;
+            font-weight: 900;
+            letter-spacing: 1px;
+            margin-bottom: 8px;
+            text-transform: uppercase;
+        }
+
+        .modal-subtitle {
+            color: var(--text-secondary);
+            font-size: 12.5px;
+            margin-bottom: 22px;
+            line-height: 1.55;
+        }
+
+        .modal-body {
+            display: grid;
+            gap: 14px;
+        }
+
+        .modal-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+        }
+
+        .modal-field label {
+            display: block;
+            color: var(--neon-magenta);
+            font-size: 10.5px;
+            font-weight: 800;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            margin-bottom: 7px;
+        }
+
+        .modal-field input,
+        .modal-field select {
+            width: 100%;
+            padding: 12px 14px;
+            background: rgba(5, 8, 22, 0.7);
+            border: 1px solid rgba(255, 46, 151, 0.28);
+            border-radius: var(--radius-sm);
+            color: var(--text-primary);
+            font-size: 14px;
+            font-family: inherit;
+        }
+
+        .modal-field input::placeholder {
+            color: var(--text-dim);
+        }
+
+        .modal-field input:focus,
+        .modal-field select:focus {
+            outline: none;
+            border-color: var(--neon-magenta);
+            box-shadow: 0 0 0 3px rgba(255, 46, 151, 0.13);
+        }
+
+        .modal-field select option {
+            background: var(--bg-panel-solid);
+            color: var(--text-primary);
+        }
+
+        .modal-actions {
+            display: flex;
+            gap: 10px;
+            margin-top: 24px;
+        }
+
+        .modal-save {
+            flex: 1;
+            background: linear-gradient(135deg, var(--neon-magenta), var(--neon-crimson));
+            color: white;
+            border: none;
+            padding: 13px;
+            font-size: 12.5px;
+            font-weight: 900;
+            letter-spacing: 1.2px;
+            text-transform: uppercase;
+            border-radius: var(--radius-sm);
+            cursor: pointer;
+            font-family: inherit;
+            box-shadow: 0 6px 24px rgba(255, 46, 151, 0.35);
+        }
+
+        .modal-save:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(255, 46, 151, 0.5);
+        }
+
+        .modal-cancel {
+            background: rgba(90, 106, 148, 0.22);
+            color: var(--text-secondary);
+            border: 1px solid var(--border-soft);
+            padding: 13px 20px;
+            font-size: 12.5px;
+            font-weight: 800;
+            letter-spacing: 1.2px;
+            text-transform: uppercase;
+            border-radius: var(--radius-sm);
+            cursor: pointer;
+            font-family: inherit;
+        }
+
+        .modal-cancel:hover {
+            background: rgba(90, 106, 148, 0.35);
+            color: var(--text-primary);
+        }

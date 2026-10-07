@@ -1,0 +1,215 @@
+        /* ==================== RESPONSIVE ==================== */
+        @media (max-width: 650px) {
+            body {
+                padding-bottom: 24px;
+            }
+
+            .navbar {
+                align-items: flex-start;
+                gap: 10px;
+                padding: 12px 16px;
+            }
+
+            .logo {
+                font-size: 19px;
+            }
+
+            .logo::before {
+                width: 7px;
+                height: 7px;
+                margin-right: 8px;
+            }
+
+            .navbar>div:last-child {
+                flex-wrap: wrap;
+                gap: 7px !important;
+                justify-content: flex-end;
+            }
+
+            #user-profile-tag {
+                font-size: 10.5px;
+                max-width: 150px;
+                overflow-wrap: anywhere;
+                text-align: right;
+                padding: 5px 10px;
+            }
+
+            .logout-btn {
+                font-size: 10.5px;
+                padding: 6px 11px;
+            }
+
+            .login-container {
+                min-height: 75vh;
+                padding: 16px;
+            }
+
+            .login-card {
+                padding: 32px 24px;
+            }
+
+            .login-card h2 {
+                font-size: 28px;
+            }
+
+            .dashboard-container {
+                margin: 16px auto;
+                padding: 0 12px;
+            }
+
+            .panel {
+                padding: 20px;
+            }
+
+            .panel h2 {
+                font-size: 17px;
+            }
+
+            .dashboard-grid,
+            .stat-row {
+                grid-template-columns: 1fr;
+            }
+
+            .dashboard-grid .panel-wide {
+                grid-column: auto;
+            }
+
+            .ann-input-group {
+                flex-direction: column;
+            }
+
+            .ann-input-group button {
+                padding: 12px;
+            }
+
+            .seating-grid {
+                grid-template-columns: repeat(3, 1fr);
+                gap: 8px;
+            }
+
+            .seat {
+                min-height: 68px;
+                font-size: 10px;
+            }
+
+            .faculty-header {
+                align-items: flex-start;
+                flex-direction: column;
+            }
+
+            .seat-plan-layout {
+                grid-template-columns: 1fr;
+            }
+
+            .report-counts {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .chart-controls {
+                grid-template-columns: 1fr;
+            }
+
+            .chart-summary {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .bar-row {
+                grid-template-columns: 85px 1fr 42px;
+            }
+
+            .tab-bar {
+                gap: 2px;
+            }
+
+            .tab-button {
+                flex: 0 0 auto;
+                font-size: 10.5px;
+                padding: 10px 13px;
+            }
+
+            .quick-actions,
+            .faculty-actions,
+            .review-actions {
+                flex-direction: column;
+            }
+
+            .quick-action {
+                width: 100%;
+                text-align: center;
+            }
+
+            .review-form-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .review-form .full-width {
+                grid-column: auto;
+            }
+
+            .room-card-header {
+                align-items: flex-start;
+                flex-direction: column;
+                gap: 5px;
+            }
+
+            .room-search-row {
+                align-items: stretch;
+                grid-template-columns: 1fr;
+            }
+
+            .room-search-row .quick-action {
+                width: 100%;
+            }
+
+            .report-class-selector {
+                max-width: none;
+            }
+
+            #report-action-button {
+                width: 100%;
+            }
+
+            .modal-row {
+                grid-template-columns: 1fr;
+            }
+
+            .modal-card {
+                padding: 24px 20px;
+            }
+
+            .data-table th,
+            .data-table td {
+                padding: 10px 12px;
+                font-size: 12px;
+            }
+        }
+
+        @media (max-width: 380px) {
+            .seating-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .status-options {
+                display: grid;
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .status-option {
+                width: 100%;
+            }
+
+            .attendance-summary {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+
+            *,
+            *::before,
+            *::after {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+            }
+        }

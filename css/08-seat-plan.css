@@ -1,0 +1,94 @@
+        /* ==================== SEAT PLAN ==================== */
+        .seat-plan-layout {
+            display: grid;
+            grid-template-columns: 230px minmax(0, 1fr);
+            gap: 22px;
+        }
+
+        .student-roster-panel {
+            background: var(--bg-elevated);
+            border-radius: var(--radius-sm);
+            padding: 16px;
+            border: 1px solid var(--border-soft);
+        }
+
+        .student-roster-panel h3 {
+            font-size: 14px;
+            margin-bottom: 6px;
+            color: var(--neon-cyan);
+            font-weight: 800;
+        }
+
+        .student-roster-panel p {
+            color: var(--text-secondary);
+            font-size: 11px;
+            line-height: 1.55;
+            margin-bottom: 14px;
+        }
+
+        .student-roster {
+            display: grid;
+            gap: 8px;
+            max-height: 420px;
+            overflow-y: auto;
+            padding-right: 6px;
+        }
+
+        .draggable-student {
+            background: rgba(0, 229, 255, 0.07);
+            border: 1px solid var(--border-glow);
+            border-radius: var(--radius-sm);
+            cursor: grab;
+            font-size: 12px;
+            font-weight: 700;
+            padding: 11px 12px;
+            color: var(--text-primary);
+        }
+
+        .draggable-student:hover {
+            background: rgba(0, 229, 255, 0.14);
+            transform: translateX(4px);
+            box-shadow: 0 4px 16px rgba(0, 229, 255, 0.14);
+        }
+
+        .draggable-student:active {
+            cursor: grabbing;
+        }
+
+        .semester-reset {
+            background: rgba(90, 106, 148, 0.16) !important;
+            color: var(--text-secondary) !important;
+            border-color: var(--border-soft) !important;
+            margin-top: 14px;
+            width: 100%;
+        }
+
+        .assignment-note {
+            color: var(--text-secondary);
+            font-size: 13px;
+            margin-bottom: 12px;
+            line-height: 1.55;
+        }
+
+        .class-selector {
+            border: 1px solid var(--border-soft);
+            border-radius: var(--radius-sm);
+            font-size: 14px;
+            margin-bottom: 12px;
+            padding: 11px 13px;
+            width: 100%;
+            background: rgba(5, 8, 22, 0.6);
+            color: var(--text-primary);
+            font-family: inherit;
+        }
+
+        .class-selector:focus {
+            outline: none;
+            border-color: var(--neon-cyan);
+            box-shadow: 0 0 0 3px rgba(0, 229, 255, 0.1);
+        }
+
+        .class-selector option {
+            background: var(--bg-panel-solid);
+            color: var(--text-primary);
+        }

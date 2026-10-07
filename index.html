@@ -1,0 +1,515 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TapTrack Portal</title>
+    <meta name="theme-color" content="#04060f">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;600;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="css/00-base.css">
+    <link rel="stylesheet" href="css/01-loader.css">
+    <link rel="stylesheet" href="css/02-navbar.css">
+    <link rel="stylesheet" href="css/03-login.css">
+    <link rel="stylesheet" href="css/04-panels.css">
+    <link rel="stylesheet" href="css/05-tabs.css">
+    <link rel="stylesheet" href="css/06-attendance.css">
+    <link rel="stylesheet" href="css/07-review-report.css">
+    <link rel="stylesheet" href="css/08-seat-plan.css">
+    <link rel="stylesheet" href="css/09-room-monitor.css">
+    <link rel="stylesheet" href="css/10-charts.css">
+    <link rel="stylesheet" href="css/11-badges.css">
+    <link rel="stylesheet" href="css/12-data-tables.css">
+    <link rel="stylesheet" href="css/13-modal.css">
+    <link rel="stylesheet" href="css/14-responsive.css">
+</head>
+
+<body>
+
+    <div id="scifi-loader">
+        <div class="loader-particles" id="loaderParticles"></div>
+        <div class="hud-corner tl"></div>
+        <div class="hud-corner tr"></div>
+        <div class="hud-corner bl"></div>
+        <div class="hud-corner br"></div>
+        <div class="loader-deco"><span></span><span></span><span></span><span></span><span></span></div>
+        <div class="loader-deco right"><span></span><span></span><span></span><span></span><span></span></div>
+        <div class="loader-stage">
+            <div class="scanner">
+                <div class="scanner-ticks" id="scannerTicks"></div>
+                <div class="scanner-ring"></div>
+                <div class="scanner-ring inner"></div>
+                <div class="scanner-ring core"></div>
+                <div class="scanner-core">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="var(--neon-cyan)" stroke-width="2"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M12 2 L20 7 L20 17 L12 22 L4 17 L4 7 Z" />
+                        <circle cx="12" cy="12" r="3" />
+                    </svg>
+                </div>
+            </div>
+            <h1 class="loader-title" id="loaderTitle">TAPTRACK</h1>
+            <p class="loader-subtitle" id="loaderSubtitle">INITIALIZING SECURE CONNECTION</p>
+            <div class="loader-progress">
+                <div class="loader-progress-fill" id="loaderProgressFill"></div>
+            </div>
+            <div class="loader-percentage" id="loaderPercentage">0%</div>
+            <div class="loader-log" id="loaderLog"></div>
+        </div>
+    </div>
+
+    <div id="app-navbar" class="navbar" style="display: none;">
+        <div class="logo">TapTrack</div>
+        <div style="display: flex; align-items: center; gap: 15px;">
+            <span id="user-profile-tag" style="font-weight: bold;"></span>
+            <button class="logout-btn ripple" onclick="logout()">Logout</button>
+        </div>
+    </div>
+
+    <div id="login-screen" class="login-container">
+        <div class="login-card">
+            <h2>TapTrack</h2>
+            <div class="form-group">
+                <label for="uid">User ID / Username</label>
+                <input type="text" id="uid" value="teacher1">
+            </div>
+            <div class="form-group">
+                <label for="pwd">Password</label>
+                <input type="password" id="pwd" value="123">
+            </div>
+            <button class="login-submit-btn ripple" onclick="login()">Log In</button>
+            <div class="hint-text">
+                <strong>Try these profiles:</strong><br>
+                Password 123: teacher1 - teacher11, Engineering student1 - student5<br>
+                Password 321: STED student6 - student10 &nbsp;|&nbsp; faculty1 &nbsp;|&nbsp; admin1<br>
+                Password 654: General Education student11 - student15<br>
+                Password 456: Information Technology student16 - student20
+            </div>
+        </div>
+    </div>
+
+    <div id="student-dashboard" class="dashboard-container">
+        <div class="panel">
+            <div class="tab-bar">
+                <button id="student-overview-tab-button" class="tab-button active"
+                    onclick="switchStudentTab('student-overview-tab')">Overview</button>
+                <button id="student-attendance-tab-button" class="tab-button"
+                    onclick="switchStudentTab('student-attendance-tab')">My Attendance</button>
+            </div>
+            <div id="student-overview-tab" class="tab-panel active">
+                <div class="dashboard-grid">
+                    <div class="panel panel-wide">
+                        <h2>Student Dashboard</h2>
+                        <div class="stat-row">
+                            <div class="stat-card"><strong>92%</strong><span>Attendance</span></div>
+                            <div class="stat-card"><strong>4</strong><span>Classes today</span></div>
+                            <div class="stat-card"><strong>2</strong><span>Pending tasks</span></div>
+                        </div>
+                        <div class="quick-actions">
+                            <button class="quick-action ripple" onclick="showStudentId()">Show Student ID</button>
+                            <button class="quick-action ripple"
+                                onclick="switchStudentTab('student-attendance-tab'); document.getElementById('attendance-review-date').focus()">Request
+                                Attendance Review</button>
+                        </div>
+                    </div>
+                    <div class="panel">
+                        <h2>My Schedule <span class="room-live-badge">LIVE</span></h2>
+                        <ul id="student-schedule" class="schedule-list"></ul>
+                    </div>
+                    <div class="panel">
+                        <h2>📢 Notice Board</h2>
+                        <div id="student-announcements"></div>
+                    </div>
+                </div>
+            </div>
+            <div id="student-attendance-tab" class="tab-panel">
+                <h2>My Attendance</h2>
+                <div id="attendance-summary" class="attendance-summary"></div>
+                <div id="attendance-records"></div>
+                <div class="follow-up-form">
+                    <label for="attendance-follow-up">What happened during the absence or late arrival you want to
+                        follow up on?</label>
+                    <textarea id="attendance-follow-up" placeholder="Enter your message for your teacher..."></textarea>
+                    <button class="quick-action ripple" onclick="submitAttendanceFollowUp()">Submit Follow-up</button>
+                    <div id="follow-up-message" class="follow-up-message"></div>
+                    <div class="review-form">
+                        <h3>Attendance Review Request</h3>
+                        <p class="review-deadline">Attach proof within 5 days of the absence so your teacher can review
+                            the specific date.</p>
+                        <div class="review-form-grid">
+                            <div>
+                                <label for="attendance-review-date">Absent date</label>
+                                <input id="attendance-review-date" type="date" required>
+                            </div>
+                            <div>
+                                <label for="attendance-review-class">Class</label>
+                                <select id="attendance-review-class"></select>
+                            </div>
+                            <div class="full-width">
+                                <label for="attendance-proof">Proof image</label>
+                                <input id="attendance-proof" type="file" accept="image/*">
+                            </div>
+                            <div class="full-width">
+                                <label for="attendance-review-reason">Reason for absence</label>
+                                <textarea id="attendance-review-reason"
+                                    placeholder="Explain the medical appointment or reason you could not attend..."></textarea>
+                            </div>
+                        </div>
+                        <button class="quick-action ripple" onclick="submitAttendanceReview()">Submit Attendance
+                            Review</button>
+                        <div id="attendance-review-message" class="follow-up-message"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="admin-dashboard" class="dashboard-container">
+        <div class="panel">
+            <h2>⚙️ Administrator Control Panel</h2>
+            <label style="font-weight: 700; display: block; margin-bottom: 8px; color: var(--text-secondary); font-size: 12px; letter-spacing: 0.6px; text-transform: uppercase;">Publish New Announcement:</label>
+            <div class="ann-input-group">
+                <input type="text" id="new-ann-text" placeholder="Type school announcement text here...">
+                <button class="ripple" onclick="addAnnouncement()">Publish</button>
+            </div>
+            <div style="margin-top: 24px;">
+                <h3 style="color: var(--neon-cyan);">Enrollment Overview</h3>
+                <button class="quick-action ripple" style="margin-top: 12px;" onclick="refreshAdminDashboard()">Refresh Faculty Summary</button>
+                <div id="admin-summary-cards" class="stat-row" style="margin-top: 16px;"></div>
+                <div class="chart-section" style="margin-top: 18px;">
+                    <h3>Academic Summary</h3>
+                    <div id="admin-summary-chart"></div>
+                </div>
+            </div>
+            <div style="margin-top: 24px;">
+                <h3 style="color: var(--neon-cyan);">Faculty Submissions</h3>
+                <div id="faculty-admin-submission-list" style="margin-top: 12px;"></div>
+            </div>
+            <h3 style="color: var(--neon-cyan); margin-top: 24px;">Active System Notices:</h3>
+            <div id="admin-announcements" style="margin-top: 12px;"></div>
+        </div>
+    </div>
+
+    <div id="staff-dashboard" class="dashboard-container">
+        <div class="panel">
+            <div class="faculty-header">
+                <div>
+                    <span id="staff-role-badge" class="role-badge">Teacher Workspace</span>
+                    <h2 id="staff-dashboard-title">Teacher Dashboard</h2>
+                    <p id="staff-dashboard-description">Manage your assigned classes and attendance.</p>
+                </div>
+                <div>
+                    <select id="report-class-selector" class="class-selector report-class-selector"
+                        onchange="selectReportClass(this.value)">
+                        <option value="">Select assigned class</option>
+                    </select>
+                    <button id="report-action-button" class="quick-action ripple" disabled
+                        onclick="submitAttendanceReport()">Submit Attendance Report</button>
+                    <div id="faculty-admin-controls" style="display: none; margin-top: 10px;">
+                        <select id="faculty-department-selector" class="class-selector">
+                            <option value="all">All Departments</option>
+                            <option value="Engineering">Engineering</option>
+                            <option value="STED">STED</option>
+                            <option value="General Education">General Education</option>
+                            <option value="Information Technology">Information Technology</option>
+                        </select>
+                        <button class="quick-action ripple" onclick="submitFacultyToAdmin()">Submit to Admin</button>
+                    </div>
+                </div>
+            </div>
+            <div id="report-submit-message" class="report-submit-message"></div>
+            <div class="panel" style="margin-bottom: 22px;">
+                <h2>📢 Announcements</h2>
+                <div id="staff-announcements"></div>
+            </div>
+            <div class="stat-row">
+                <div class="stat-card"><strong id="enrollment-count">25</strong><span>Enrolled students</span></div>
+                <div class="stat-card"><strong id="present-count">1</strong><span>Present today</span></div>
+                <div class="stat-card announcement-composer">
+                    <strong>📢</strong>
+                    <span>Send announcement</span>
+                    <select id="staff-announcement-audience">
+                        <option value="student">Students</option>
+                        <option value="teacher">Teachers</option>
+                        <option value="all">Everyone</option>
+                    </select>
+                    <input id="staff-announcement-text" type="text" placeholder="Write an announcement...">
+                    <button class="quick-action ripple" onclick="sendStaffAnnouncement()">Send</button>
+                </div>
+            </div>
+            <div class="tab-bar">
+                <button id="schedule-tab-button" class="tab-button active"
+                    onclick="switchStaffTab('schedule-tab')">Assigned Classes</button>
+                <button id="seating-tab-button" class="tab-button" onclick="switchStaffTab('seating-tab')">Seat
+                    Plan</button>
+                <button id="reviews-tab-button" class="tab-button" onclick="switchStaffTab('reviews-tab')">Attendance
+                    Reviews</button>
+                <button id="room-tab-button" class="tab-button" onclick="switchStaffTab('room-tab')">Room
+                    Monitor</button>
+                <button id="reports-tab-button" class="tab-button" onclick="switchStaffTab('reports-tab')">Submitted
+                    Reports</button>
+                <button id="charts-tab-button" class="tab-button" onclick="switchStaffTab('charts-tab')">Attendance
+                    Charts</button>
+                <button id="roster-tab-button" class="tab-button faculty-only" style="display:none;"
+                    onclick="switchStaffTab('roster-tab')">👥 Class Rosters</button>
+                <button id="teachers-tab-button" class="tab-button faculty-only" style="display:none;"
+                    onclick="switchStaffTab('teachers-tab')">🧑‍🏫 Teachers</button>
+                <button id="progress-tab-button" class="tab-button faculty-only" style="display:none;"
+                    onclick="switchStaffTab('progress-tab')">📈 Student Progress</button>
+                <button id="audit-tab-button" class="tab-button faculty-only" style="display:none;"
+                    onclick="switchStaffTab('audit-tab')">🔎 Dept Audit</button>
+            </div>
+            <div id="schedule-tab" class="tab-panel active">
+                <div class="faculty-actions">
+                    <button class="quick-action cancel-class-btn ripple" onclick="cancelCurrentClass()">Cancel Current
+                        Class</button>
+                    <button class="quick-action ripple" onclick="announceNextClass()">Announce Next Class</button>
+                </div>
+                <div id="class-notice" class="class-notice"></div>
+                <h2 id="schedule-heading">Assigned Schedule <span class="room-live-badge">LIVE</span></h2>
+                <ul id="assigned-schedule" class="schedule-list"></ul>
+            </div>
+            <div id="seating-tab" class="tab-panel">
+                <h2>🏫 Classroom Map & Attendance Desk Grid</h2>
+                <div class="legend">
+                    <div class="legend-item">
+                        <div class="color-box" style="background: #5a6a94;"></div> Empty
+                    </div>
+                    <div class="legend-item">
+                        <div class="color-box" style="background: #00ff9d;"></div> Present
+                    </div>
+                    <div class="legend-item">
+                        <div class="color-box" style="background: #a855f7;"></div> Excused
+                    </div>
+                    <div class="legend-item">
+                        <div class="color-box" style="background: #ff2e97;"></div> Absent
+                    </div>
+                    <div class="legend-item">
+                        <div class="color-box" style="background: #ffb020;"></div> Late
+                    </div>
+                    <div class="legend-item">
+                        <div class="color-box" style="background: #5a6a94;"></div> Dropped
+                    </div>
+                </div>
+                <div class="attendance-picker">
+                    <p>Select attendance result, then click a seat:</p>
+                    <div class="status-options">
+                        <button type="button" class="status-option empty" data-status="empty"
+                            onclick="selectAttendanceStatus('empty')">Empty</button>
+                        <button type="button" class="status-option present selected" data-status="present"
+                            onclick="selectAttendanceStatus('present')">Present</button>
+                        <button type="button" class="status-option excused" data-status="excused"
+                            onclick="selectAttendanceStatus('excused')">Excused</button>
+                        <button type="button" class="status-option absent" data-status="absent"
+                            onclick="selectAttendanceStatus('absent')">Absent</button>
+                        <button type="button" class="status-option late" data-status="late"
+                            onclick="selectAttendanceStatus('late')">Late</button>
+                        <button type="button" class="status-option dropped" data-status="dropped"
+                            onclick="selectAttendanceStatus('dropped')">Dropped</button>
+                    </div>
+                </div>
+                <div class="blackboard">[ FRONT / BLACKBOARD DIRECTION ]</div>
+                <label for="seat-plan-class" class="assignment-note">Choose the class to arrange:</label>
+                <select id="seat-plan-class" class="class-selector" onchange="loadClassSeatPlan(this.value)"></select>
+                <p class="assignment-note">Drag an unassigned student onto an empty seat. Seat assignments remain
+                    permanent until semester reset.</p>
+                <div class="seat-plan-layout">
+                    <aside class="student-roster-panel">
+                        <h3>Unassigned Students</h3>
+                        <p>Drag a name to an empty seat.</p>
+                        <div id="student-roster" class="student-roster"></div>
+                        <button type="button" class="quick-action semester-reset ripple"
+                            onclick="resetSemesterSeatPlan()">End Semester / Reset</button>
+                    </aside>
+                    <div id="classroom-seating-grid" class="seating-grid"></div>
+                </div>
+            </div>
+            <div id="room-tab" class="tab-panel">
+                <h2>Dean Classroom Layout</h2>
+                <p class="assignment-note">Mark each room for the school schedule. Changes appear for students and
+                    teachers only after you press Broadcast.</p>
+                <div class="legend room-legend">
+                    <div class="legend-item">
+                        <div class="color-box" style="background: #00ff9d;"></div> Scheduled class
+                    </div>
+                    <div class="legend-item">
+                        <div class="color-box" style="background: #5a6a94;"></div> No class
+                    </div>
+                    <div class="legend-item">
+                        <div class="color-box" style="background: #ff2e97;"></div> Occasion
+                    </div>
+                </div>
+                <p id="room-status-summary" class="room-status-summary"></p>
+                <p id="room-auto-assign-message" class="room-status-summary"></p>
+                <select id="room-department-filter" class="class-selector"
+                    onchange="filterRooms(document.getElementById('room-search').value)">
+                    <option value="all">All Departments</option>
+                    <option value="Engineering">EAN / Engineering</option>
+                    <option value="STED">STED</option>
+                    <option value="General Education">General Education</option>
+                    <option value="Information Technology">Information Technology</option>
+                </select>
+                <div class="room-search-row">
+                    <input id="room-search" class="room-search" type="search"
+                        placeholder="Search by room, class, or teacher..." oninput="filterRooms(this.value)">
+                    <button type="button" class="quick-action ripple" id="broadcast-room-btn"
+                        onclick="broadcastRoomUpdates()">📡 Broadcast Room Updates <span id="broadcast-pending-badge"
+                            class="broadcast-badge" style="display:none;">0</span></button>
+                    <button type="button" class="quick-action ripple" id="reset-rooms-btn"
+                        onclick="resetTemporaryRooms()"
+                        style="background: linear-gradient(135deg, rgba(90, 106, 148, 0.18), rgba(90, 106, 148, 0.1)); color: var(--text-secondary); border-color: var(--border-soft);">↩️
+                        Back to Normal</button>
+                </div>
+                <div id="room-monitor" class="room-monitor"></div>
+                <div id="room-empty-search" class="room-empty-search">No matching room, class, or teacher found.</div>
+            </div>
+            <div id="reports-tab" class="tab-panel">
+                <h2>Submitted Attendance Reports</h2>
+                <div id="faculty-report-list"></div>
+            </div>
+            <div id="charts-tab" class="tab-panel">
+                <h2>Faculty Attendance Charts</h2>
+                <div class="chart-board">
+                    <div class="chart-section">
+                        <h3>Room Attendance for the Week</h3>
+                        <div class="chart-controls">
+                            <select id="chart-room-selector" onchange="renderRoomWeekChart()"></select>
+                            <select id="chart-week-selector" onchange="renderRoomWeekChart()">
+                                <option value="current">Current Week</option>
+                                <option value="previous">Previous Week</option>
+                            </select>
+                        </div>
+                        <div id="room-week-chart"></div>
+                    </div>
+                    <div class="chart-section">
+                        <h3>Department Semester Attendance</h3>
+                        <div class="chart-controls">
+                            <select id="chart-department-selector" onchange="renderDepartmentSemesterChart()">
+                                <option value="all">All Departments</option>
+                                <option value="Engineering">Engineering</option>
+                                <option value="General Education">General Education</option>
+                                <option value="Information Technology">Information Technology</option>
+                                <option value="STED">STED</option>
+                            </select>
+                        </div>
+                        <div id="department-semester-chart"></div>
+                    </div>
+                </div>
+            </div>
+            <div id="reviews-tab" class="tab-panel">
+                <h2>Attendance Review Requests</h2>
+                <p class="assignment-note">Review attached proof and update the student's attendance for the requested
+                    date.</p>
+                <div id="teacher-review-list"></div>
+            </div>
+
+            <!-- NEW FACULTY TABS -->
+            <div id="roster-tab" class="tab-panel">
+                <h2>👥 Class Rosters</h2>
+                <p class="assignment-note">Add or remove students, mark them dropped, or reassign them between classes.
+                </p>
+                <label class="assignment-note" for="roster-class-selector">Choose a class:</label>
+                <select id="roster-class-selector" class="class-selector"
+                    onchange="renderRosterEditor(this.value)"></select>
+                <div id="roster-summary" class="stat-row" style="margin-top:12px;"></div>
+                <div id="roster-editor"></div>
+            </div>
+
+            <div id="teachers-tab" class="tab-panel">
+                <h2>🧑‍🏫 Teacher Overview</h2>
+                <p class="assignment-note">See every teacher's assigned classes, submission rate, and pending workload.
+                </p>
+                <div id="teachers-overview"></div>
+            </div>
+
+            <div id="progress-tab" class="tab-panel">
+                <h2>📈 Student Progress</h2>
+                <p class="assignment-note">Attendance percentages and at-risk students across your department.</p>
+                <div id="progress-summary" class="chart-summary"></div>
+                <div id="progress-list"></div>
+            </div>
+
+            <div id="audit-tab" class="tab-panel">
+                <h2>🔎 Department Attendance Audit</h2>
+                <p class="assignment-note">Inspect and override individual attendance records across the department.</p>
+                <div class="quick-actions" style="margin-bottom: 14px;">
+                    <select id="audit-class-selector" class="class-selector" style="max-width: 320px; margin: 0;"
+                        onchange="renderDeptAudit()">
+                        <option value="all">All Classes</option>
+                    </select>
+                    <button class="quick-action ripple" onclick="exportDeptAuditCSV()">⬇️ Export CSV</button>
+                </div>
+                <div id="dept-audit-list"></div>
+            </div>
+        </div>
+    </div>
+
+    <div id="occasion-modal">
+        <div class="modal-card">
+            <div class="modal-accent"></div>
+            <h2 class="modal-title">🔴 Occasion Reservation</h2>
+            <p class="modal-subtitle">This room will be marked as reserved. Students and teachers will see the details
+                after you press Broadcast.</p>
+            <div class="modal-body">
+                <div class="modal-field">
+                    <label for="occasion-reason">Event name / reason</label>
+                    <input id="occasion-reason" type="text" placeholder="e.g., Science Fair, Faculty Meeting...">
+                </div>
+                <div class="modal-row">
+                    <div class="modal-field">
+                        <label for="occasion-date">Date</label>
+                        <input id="occasion-date" type="date">
+                    </div>
+                    <div class="modal-field">
+                        <label for="occasion-duration-type">Duration type</label>
+                        <select id="occasion-duration-type">
+                            <option value="hours">Specific hours</option>
+                            <option value="allday">Whole day</option>
+                        </select>
+                    </div>
+                </div>
+                <div id="occasion-time-fields" class="modal-row">
+                    <div class="modal-field">
+                        <label for="occasion-start">Start time</label>
+                        <input id="occasion-start" type="text" placeholder="1:00 PM">
+                    </div>
+                    <div class="modal-field">
+                        <label for="occasion-end">End time</label>
+                        <input id="occasion-end" type="text" placeholder="4:00 PM">
+                    </div>
+                </div>
+            </div>
+            <div class="modal-actions">
+                <button id="occasion-save-btn" class="modal-save">Stage Reservation</button>
+                <button id="occasion-cancel-btn" class="modal-cancel">Cancel</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/01-ui-effects.js"></script>
+    <script src="js/02-data.js"></script>
+    <script src="js/03-state.js"></script>
+    <script src="js/04-schedule-utils.js"></script>
+    <script src="js/05-auth-layout.js"></script>
+    <script src="js/06-announcements.js"></script>
+    <script src="js/07-admin-dashboard.js"></script>
+    <script src="js/08-student-portal.js"></script>
+    <script src="js/09-attendance-review.js"></script>
+    <script src="js/10-teacher-tools.js"></script>
+    <script src="js/11-room-monitor.js"></script>
+    <script src="js/12-staff-workspace.js"></script>
+    <script src="js/13-faculty-management.js"></script>
+    <script src="js/14-reports.js"></script>
+    <script src="js/15-charts.js"></script>
+    <script src="js/16-seat-plan.js"></script>
+    <script src="js/17-sync-bootstrap.js"></script>
+</body>
+
+</html>

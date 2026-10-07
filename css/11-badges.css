@@ -1,0 +1,50 @@
+        /* ==================== BADGES ==================== */
+        .room-live-badge {
+            background: linear-gradient(90deg, var(--neon-green), var(--neon-cyan));
+            color: #04060f;
+            font-size: 9px;
+            padding: 4px 10px;
+            border-radius: 20px;
+            font-weight: 900;
+            letter-spacing: 1px;
+            vertical-align: middle;
+            box-shadow: 0 0 14px rgba(0, 255, 157, 0.4);
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .room-live-badge::before {
+            content: '';
+            width: 5px;
+            height: 5px;
+            border-radius: 50%;
+            background: #04060f;
+            animation: pulseDot 1.5s ease-in-out infinite;
+        }
+
+        .broadcast-badge {
+            background: var(--neon-magenta);
+            color: white;
+            font-size: 10px;
+            padding: 2px 8px;
+            border-radius: 12px;
+            margin-left: 6px;
+            font-weight: 900;
+            animation: pulseDot 1.6s ease-in-out infinite;
+            box-shadow: 0 0 12px rgba(255, 46, 151, 0.6);
+        }
+
+        @keyframes pulseDot {
+
+            0%,
+            100% {
+                opacity: 1;
+                transform: scale(1);
+            }
+
+            50% {
+                opacity: 0.55;
+                transform: scale(0.85);
+            }
+        }

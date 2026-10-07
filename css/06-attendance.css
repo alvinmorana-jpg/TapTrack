@@ -1,0 +1,285 @@
+        /* ==================== ATTENDANCE ==================== */
+        .attendance-picker {
+            background: var(--bg-elevated);
+            padding: 16px;
+            border-radius: var(--radius-sm);
+            margin-bottom: 18px;
+            border: 1px solid var(--border-soft);
+        }
+
+        .attendance-picker p {
+            color: var(--text-secondary);
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 1px;
+            margin-bottom: 12px;
+            text-transform: uppercase;
+        }
+
+        .status-options {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+
+        .status-option {
+            border: 2px solid transparent;
+            border-radius: var(--radius-sm);
+            color: var(--text-primary);
+            cursor: pointer;
+            font-size: 11px;
+            font-weight: 800;
+            letter-spacing: 0.7px;
+            padding: 10px 15px;
+            text-transform: uppercase;
+            font-family: inherit;
+        }
+
+        .status-option:hover {
+            transform: translateY(-2px);
+        }
+
+        .status-option.selected {
+            border-color: var(--text-primary);
+            box-shadow: 0 0 16px currentColor, 0 0 0 3px rgba(255, 255, 255, 0.06);
+        }
+
+        .status-option.empty {
+            background: rgba(120, 140, 200, 0.35);
+            color: var(--text-primary);
+        }
+
+        .status-option.present {
+            background: rgba(0, 255, 157, 0.22);
+            color: var(--neon-green);
+        }
+
+        .status-option.excused {
+            background: rgba(168, 85, 247, 0.22);
+            color: var(--neon-violet);
+        }
+
+        .status-option.absent {
+            background: rgba(255, 46, 151, 0.22);
+            color: var(--neon-magenta);
+        }
+
+        .status-option.late {
+            background: rgba(255, 176, 32, 0.22);
+            color: var(--neon-amber);
+        }
+
+        .status-option.dropped {
+            background: rgba(90, 106, 148, 0.35);
+            color: var(--text-dim);
+        }
+
+        .attendance-summary {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 12px;
+            margin-bottom: 24px;
+        }
+
+        .attendance-summary-card {
+            border-radius: var(--radius-sm);
+            padding: 18px;
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 1.1px;
+            text-transform: uppercase;
+            border: 1px solid transparent;
+        }
+
+        .attendance-summary-card strong {
+            display: block;
+            font-size: 28px;
+            font-weight: 900;
+            margin-bottom: 4px;
+            letter-spacing: -0.5px;
+            line-height: 1.1;
+        }
+
+        .attendance-summary-card.present {
+            background: linear-gradient(135deg, rgba(0, 255, 157, 0.18), rgba(0, 229, 255, 0.06));
+            border-color: rgba(0, 255, 157, 0.35);
+            color: var(--neon-green);
+        }
+
+        .attendance-summary-card.excused {
+            background: linear-gradient(135deg, rgba(168, 85, 247, 0.18), rgba(59, 130, 246, 0.06));
+            border-color: rgba(168, 85, 247, 0.35);
+            color: var(--neon-violet);
+        }
+
+        .attendance-summary-card.absent {
+            background: linear-gradient(135deg, rgba(255, 46, 151, 0.18), rgba(255, 71, 87, 0.06));
+            border-color: rgba(255, 46, 151, 0.35);
+            color: var(--neon-magenta);
+        }
+
+        .attendance-summary-card.late {
+            background: linear-gradient(135deg, rgba(255, 176, 32, 0.18), rgba(255, 140, 0, 0.06));
+            border-color: rgba(255, 176, 32, 0.35);
+            color: var(--neon-amber);
+        }
+
+        .attendance-row {
+            align-items: center;
+            border-bottom: 1px solid var(--border-soft);
+            display: flex;
+            justify-content: space-between;
+            gap: 15px;
+            padding: 12px 8px;
+            border-radius: 6px;
+        }
+
+        .attendance-row:hover {
+            background: rgba(0, 229, 255, 0.035);
+        }
+
+        .attendance-row:last-child {
+            border-bottom: 0;
+        }
+
+        .attendance-status {
+            border-radius: 6px;
+            font-size: 10.5px;
+            font-weight: 800;
+            letter-spacing: 0.8px;
+            padding: 5px 11px;
+            text-transform: uppercase;
+        }
+
+        .attendance-status.present {
+            background: rgba(0, 255, 157, 0.18);
+            color: var(--neon-green);
+            border: 1px solid rgba(0, 255, 157, 0.35);
+        }
+
+        .attendance-status.excused {
+            background: rgba(168, 85, 247, 0.18);
+            color: var(--neon-violet);
+            border: 1px solid rgba(168, 85, 247, 0.35);
+        }
+
+        .attendance-status.absent {
+            background: rgba(255, 46, 151, 0.18);
+            color: var(--neon-magenta);
+            border: 1px solid rgba(255, 46, 151, 0.35);
+        }
+
+        .attendance-status.late {
+            background: rgba(255, 176, 32, 0.18);
+            color: var(--neon-amber);
+            border: 1px solid rgba(255, 176, 32, 0.35);
+        }
+
+        .subject-attendance-section {
+            border: 1px solid var(--border-soft);
+            border-radius: var(--radius-sm);
+            margin-bottom: 14px;
+            padding: 18px;
+            background: var(--bg-elevated);
+        }
+
+        .subject-attendance-section:hover {
+            border-color: var(--border-glow);
+            box-shadow: 0 0 24px rgba(0, 229, 255, 0.06);
+        }
+
+        .subject-attendance-header {
+            align-items: flex-start;
+            display: flex;
+            justify-content: space-between;
+            gap: 12px;
+            margin-bottom: 8px;
+        }
+
+        .subject-attendance-header h3 {
+            color: var(--neon-cyan);
+            font-size: 15px;
+            font-weight: 800;
+        }
+
+        .subject-attendance-counts {
+            color: var(--text-secondary);
+            font-size: 11px;
+            text-align: right;
+            font-weight: 600;
+            background: rgba(0, 229, 255, 0.06);
+            padding: 4px 10px;
+            border-radius: 20px;
+        }
+
+        .subject-attendance-empty {
+            color: var(--text-dim);
+            font-size: 13px;
+            padding: 8px 0 2px;
+            font-style: italic;
+        }
+
+        @media (max-width: 650px) {
+            .subject-attendance-header {
+                flex-direction: column;
+                gap: 6px;
+            }
+
+            .subject-attendance-counts {
+                text-align: left;
+            }
+        }
+
+        .follow-up-form {
+            margin-top: 22px;
+        }
+
+        .follow-up-form label {
+            color: var(--text-secondary);
+            display: block;
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 0.8px;
+            text-transform: uppercase;
+            margin-bottom: 9px;
+        }
+
+        .follow-up-form textarea {
+            border: 1px solid var(--border-soft);
+            border-radius: var(--radius-sm);
+            display: block;
+            font-family: inherit;
+            font-size: 14px;
+            min-height: 92px;
+            padding: 13px;
+            resize: vertical;
+            width: 100%;
+            background: rgba(5, 8, 22, 0.6);
+            color: var(--text-primary);
+        }
+
+        .follow-up-form textarea::placeholder {
+            color: var(--text-dim);
+        }
+
+        .follow-up-form textarea:focus {
+            outline: none;
+            border-color: var(--neon-cyan);
+            box-shadow: 0 0 0 3px rgba(0, 229, 255, 0.1);
+        }
+
+        .follow-up-form button {
+            margin-top: 12px;
+        }
+
+        .follow-up-message {
+            color: var(--neon-green);
+            display: none;
+            font-size: 13px;
+            font-weight: 700;
+            margin-top: 12px;
+            padding: 10px 14px;
+            border-radius: var(--radius-sm);
+            background: rgba(0, 255, 157, 0.08);
+            border-left: 3px solid var(--neon-green);
+        }

@@ -1,0 +1,91 @@
+        /* ==================== DATA TABLES ==================== */
+        .data-table-wrap {
+            overflow-x: auto;
+            border-radius: var(--radius-sm);
+            border: 1px solid var(--border-soft);
+            background: var(--bg-elevated);
+        }
+
+        .data-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 13px;
+        }
+
+        .data-table thead tr {
+            background: rgba(0, 229, 255, 0.07);
+        }
+
+        .data-table th {
+            padding: 12px 14px;
+            color: var(--neon-cyan);
+            font-size: 10.5px;
+            font-weight: 800;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            text-align: left;
+            border-bottom: 1px solid var(--border-soft);
+            white-space: nowrap;
+        }
+
+        .data-table td {
+            padding: 12px 14px;
+            border-bottom: 1px solid rgba(125, 145, 205, 0.08);
+            color: var(--text-secondary);
+            vertical-align: middle;
+        }
+
+        .data-table tbody tr:hover td {
+            background: rgba(0, 229, 255, 0.04);
+        }
+
+        .data-table tbody tr:last-child td {
+            border-bottom: 0;
+        }
+
+        .data-table td.name-cell {
+            font-weight: 700;
+            color: var(--text-primary);
+        }
+
+        .table-status {
+            padding: 4px 10px;
+            border-radius: 20px;
+            font-size: 10px;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 0.7px;
+            display: inline-block;
+        }
+
+        .table-status.enrolled {
+            background: rgba(0, 255, 157, 0.16);
+            color: var(--neon-green);
+            border: 1px solid rgba(0, 255, 157, 0.32);
+        }
+
+        .table-status.dropped {
+            background: rgba(255, 46, 151, 0.16);
+            color: var(--neon-magenta);
+            border: 1px solid rgba(255, 46, 151, 0.32);
+        }
+
+        .mini-select {
+            padding: 6px 10px;
+            background: rgba(5, 8, 22, 0.7);
+            color: var(--text-primary);
+            border: 1px solid var(--border-soft);
+            border-radius: 6px;
+            font-size: 12px;
+            font-family: inherit;
+        }
+
+        .mini-select:focus {
+            outline: none;
+            border-color: var(--neon-cyan);
+        }
+
+        .mini-select option {
+            background: var(--bg-panel-solid);
+            color: var(--text-primary);
+        }
